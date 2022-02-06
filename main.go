@@ -1,8 +1,8 @@
 package main
 
 import (
-	"github.com/henvo/golang-gin-gorm-starter/models"
-	"github.com/henvo/golang-gin-gorm-starter/routes"
+	"github.com/vincentJunior1/test-kriya/models"
+	"github.com/vincentJunior1/test-kriya/routes"
 )
 
 // Entrypoint for app.
