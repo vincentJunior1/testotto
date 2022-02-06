@@ -28,4 +28,4 @@ go run main.go
 * PORT (Default: `8080`)
 * GIN_MODE (Default: `debug`)
 * DATABASE_HOST (Default: `localhost:3306`)
-* DATABASE_NAME (Default: `test`)
+* DATABASE_NAME (Default: `testing`)
