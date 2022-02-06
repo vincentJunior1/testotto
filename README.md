@@ -7,7 +7,7 @@ with Go. It uses [Gin](https://github.com/gin-gonic/gin) and
 ## Installation
 * Get the repository from GitHub
 ``` bash
-git clone git@github.com:henvo/golang-gin-gorm-starter.git
+git clone https://github.com/vincentJunior1/test-kriya.git
 ```
 * Install dependencies
 ``` bash
@@ -28,6 +28,4 @@ go run main.go
 * PORT (Default: `8080`)
 * GIN_MODE (Default: `debug`)
 * DATABASE_HOST (Default: `localhost:3306`)
-* DATABASE_NAME (Default: `go_test`)
-* DATABASE_USERNAME (Default: `golang`)
-* DATABASE_PASSWORD (Default: `golang`)
+* DATABASE_NAME (Default: `test`)
