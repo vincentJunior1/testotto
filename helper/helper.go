@@ -24,3 +24,12 @@ func GetEnv(key, fallback string) string {
 	fmt.Println(value)
 	return value
 }
+
+func GetStatus(status uint) *bool {
+	newStatus := false
+	if status == 1 {
+		newStatus = true
+		return &newStatus
+	}
+	return &newStatus
+}

@@ -7,6 +7,8 @@ import (
 
 	"github.com/dgrijalva/jwt-go"
 	"github.com/gin-gonic/gin"
+	"github.com/jinzhu/copier"
+	"github.com/vincentJunior1/test-kriya/helper"
 	"github.com/vincentJunior1/test-kriya/httpEntity"
 	"github.com/vincentJunior1/test-kriya/models"
 	"github.com/vincentJunior1/test-kriya/utils"
@@ -48,17 +50,23 @@ func GetUsers(c *gin.Context) {
 		c.JSON(http.StatusUnprocessableEntity, response)
 		c.Abort()
 		return
-	} else {
-		response := &Response{
-			Code:       http.StatusOK,
-			Message:    "Success",
-			Status:     true,
-			Data:       users,
-			Pagination: pagination,
-		}
-		c.JSON(http.StatusOK, response)
-		c.Abort()
 	}
+	res := []httpEntity.UserResponse{}
+	copier.Copy(&res, &users)
+	for i, val := range users {
+		res[i].UserName = val.UserName
+		res[i].Email = val.Email
+		res[i].IsActive = helper.GetStatus(val.Status)
+	}
+	response := &Response{
+		Code:       http.StatusOK,
+		Message:    "Success",
+		Status:     true,
+		Data:       res,
+		Pagination: pagination,
+	}
+	c.JSON(http.StatusOK, response)
+	c.Abort()
 }
 
 // GetUser finds a single user by ID.
@@ -77,16 +85,22 @@ func GetUser(c *gin.Context) {
 		c.JSON(http.StatusUnprocessableEntity, response)
 		c.Abort()
 		return
-	} else {
-		response := &Response{
-			Code:    http.StatusOK,
-			Message: "Success",
-			Status:  true,
-			Data:    user,
-		}
-		c.JSON(http.StatusOK, response)
-		c.Abort()
 	}
+	res := httpEntity.UserDataResponse{}
+	res.UserID = user.ID
+	res.Email = user.Email
+	res.UserName = user.UserName
+	res.RoleName = user.Role.Name
+	response := &Response{
+		Code:    http.StatusOK,
+		Message: "Success",
+		Status:  true,
+		Data:    res,
+	}
+	c.JSON(http.StatusOK, response)
+	c.Abort()
+	return
+
 }
 
 // CreateUser creates a new user.

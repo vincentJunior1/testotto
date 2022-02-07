@@ -45,7 +45,7 @@ func UpdateUser(user *User) (err error) {
 
 // GetUser queries the database for all users.
 func GetUser(user *User, id string) (err error) {
-	if err = DB.First(user, id).Error; err != nil {
+	if err = DB.Joins("Role").Where("users.id = ?", id).Find(user).Error; err != nil {
 		return err
 	}
 
