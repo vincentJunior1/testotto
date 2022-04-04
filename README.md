@@ -7,7 +7,7 @@ with Go. It uses [Gin](https://github.com/gin-gonic/gin) and
 ## Installation
 * Get the repository from GitHub
 ``` bash
-git clone https://github.com/vincentJunior1/test-kriya.git
+git clone https://bitbucket.org/vincent265/testmajoo/
 ```
 * Install dependencies
 ``` bash
