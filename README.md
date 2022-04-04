@@ -20,7 +20,7 @@ go run main.go
 ```
 
 ## Things to consider
-* Rename all instances of `github.com/vincentJunior1/test-kriya/` to your package
+* Rename all instances of `https://bitbucket.org/vincent265/testmajoo/` to your package
 * Switch from the default database driver (mysql) to sqlite, postgresql, ...
 
 ## Env variables
