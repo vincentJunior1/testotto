@@ -12,15 +12,15 @@ func SetupRouter() *gin.Engine {
 
 	users := r.Group("/users")
 	{
-		users.GET("/", md.JwtAuth("Admin"), controllers.GetUsers)
-		users.GET("/:id", md.JwtAuth("Admin"), controllers.GetUser)
 		users.POST("/", md.JwtAuth("Admin"), controllers.CreateUser)
-		users.PATCH("/:id", md.JwtAuth("Admin"), controllers.UpdateUser)
-		users.DELETE("/:id", md.JwtAuth("Admin"), controllers.DeleteUser)
 	}
 	login := r.Group("/login")
 	{
 		login.POST("/", controllers.Login)
+	}
+	merchant := r.Group("/merchant")
+	{
+		merchant.GET("/omzet/:merchant_id", md.JwtAuth("Admin"), controllers.GetOmzet)
 	}
 
 	return r

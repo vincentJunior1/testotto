@@ -27,13 +27,7 @@ func JwtAuth(level string) gin.HandlerFunc {
 		})
 
 		if token != nil && err == nil {
-			if level == "Admin" {
-				if newData.NewData.RoleID != 1 {
-					c.JSON(http.StatusUnauthorized, gin.H{"Error": err.Error(), "Messages": "Not Allowed"})
-					c.Abort()
-					return
-				}
-			}
+			c.Set("UserLogin", newData.NewData)
 			c.Next()
 			return
 		} else {
