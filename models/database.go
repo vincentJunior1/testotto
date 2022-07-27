@@ -16,15 +16,15 @@ import (
 var DB *gorm.DB
 
 // SetupDatabase migrates and sets up the database.
-func SetupDatabase() {
+func SetupDatabase() *gorm.DB {
 	u := helper.GetEnv("DATABASE_USER", "")
-	p := helper.GetEnv("DATABSE_PASSWORD", "")
-	h := helper.GetEnv("DATABASE_HOST", "")
+	p := helper.GetEnv("DATABASE_PASSWORD", "")
+	// h := helper.GetEnv("DATABASE_HOST", "")
 	n := helper.GetEnv("DATABASE_NAME", "")
 	q := "charset=utf8mb4&parseTime=True&loc=Local"
-	// :test@tcp(13.228.73.161:8976)/kriya_test
-	// Assemble the connection string.
-	dsn := fmt.Sprintf("%s:%s@tcp(%s)/%s?%s", u, p, h, n, q)
+
+	dsn := fmt.Sprintf("%s:%s@tcp(localhost:3306)/%s?%s", u, p, n, q)
+	fmt.Println(dsn)
 	newLogger := logger.New(
 		log.New(os.Stdout, "\r\n", log.LstdFlags), // io writer
 		logger.Config{
@@ -46,4 +46,6 @@ func SetupDatabase() {
 	}
 
 	DB = db
+
+	return DB
 }

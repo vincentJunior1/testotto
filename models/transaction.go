@@ -2,8 +2,7 @@ package models
 
 import (
 	"time"
-
-	"github.com/vincentJunior1/test-kriya/httpEntity"
+	// "github.com/vincentJunior1/test-kriya/httpEntity"
 )
 
 // User is the main user model.
@@ -24,15 +23,15 @@ func (Transaction) TableName() string {
 	return "Transactions"
 }
 
-func GetMerchantOmzet(merchantID int, startDate time.Time, endDate time.Time, userID uint, transaction *[]Transaction, pagination *httpEntity.Pagination) (err error) {
-	offset := (pagination.Page - 1) * pagination.Limit
-	query := DB.Model(transaction)
-	query = query.Select("SUM(Transactions.bill_total) as omzet,Transactions.*, Merchants.merchant_name as merchant_name, Merchants.user_id = user_id")
-	query = query.Joins("left join Merchants ON merchant_id = Merchants.id")
-	query = query.Where("merchant_id = ? AND Transactions.created_at BETWEEN ? AND ? AND user_id = ?", merchantID, startDate, endDate, userID)
-	query = query.Limit(pagination.Limit).Offset(offset).Group("DATE(Transactions.created_at)").Group("Transactions.created_at ASC")
-	pagination.TotalData = query.Find(transaction).RowsAffected
-	pagination.Sort = "transaction created_at ASC"
-	query.Find(transaction)
-	return query.Error
-}
+// func GetMerchantOmzet(merchantID int, startDate time.Time, endDate time.Time, userID uint, transaction *[]Transaction, pagination *httpEntity.Pagination) (err error) {
+// 	offset := (pagination.Page - 1) * pagination.Limit
+// 	query := DB.Model(transaction)
+// 	query = query.Select("SUM(Transactions.bill_total) as omzet,Transactions.*, Merchants.merchant_name as merchant_name, Merchants.user_id = user_id")
+// 	query = query.Joins("left join Merchants ON merchant_id = Merchants.id")
+// 	query = query.Where("merchant_id = ? AND Transactions.created_at BETWEEN ? AND ? AND user_id = ?", merchantID, startDate, endDate, userID)
+// 	query = query.Limit(pagination.Limit).Offset(offset).Group("DATE(Transactions.created_at)").Group("Transactions.created_at ASC")
+// 	pagination.TotalData = query.Find(transaction).RowsAffected
+// 	pagination.Sort = "transaction created_at ASC"
+// 	query.Find(transaction)
+// 	return query.Error
+// }

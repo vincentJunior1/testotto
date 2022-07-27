@@ -2,8 +2,7 @@ package models
 
 import (
 	"time"
-
-	"github.com/vincentJunior1/test-kriya/httpEntity"
+	// "github.com/vincentJunior1/test-kriya/httpEntity"
 )
 
 // User is the main user model.
@@ -18,59 +17,59 @@ type User struct {
 	UpdatedBy int        `gorm:"column:updated_by;type:bigint(20)not null" json:"updated_by"`
 }
 
-// GetUsers queries the database for all users.
-func GetUsers(users *[]User, pagination *httpEntity.Pagination) (err error) {
-	offset := (pagination.Page - 1) * pagination.Limit
-	DB.Table("users").Count(&pagination.TotalData)
-	if err = DB.Joins("Role").Limit(pagination.Limit).Offset(offset).Find(users).Error; err != nil {
-		return err
-	}
+// // GetUsers queries the database for all users.
+// func GetUsers(users *[]User, pagination *httpEntity.Pagination) (err error) {
+// 	offset := (pagination.Page - 1) * pagination.Limit
+// 	DB.Table("users").Count(&pagination.TotalData)
+// 	if err = DB.Joins("Role").Limit(pagination.Limit).Offset(offset).Find(users).Error; err != nil {
+// 		return err
+// 	}
 
-	return nil
-}
+// 	return nil
+// }
 
-// CreateUser creates a new user.
-func CreateUser(user *User) (err error) {
-	if err = DB.Create(user).Error; err != nil {
-		return err
-	}
-	DB.Joins("Role")
-	DB.Find(user)
-	return nil
-}
+// // CreateUser creates a new user.
+// func CreateUser(user *User) (err error) {
+// 	if err = DB.Create(user).Error; err != nil {
+// 		return err
+// 	}
+// 	DB.Joins("Role")
+// 	DB.Find(user)
+// 	return nil
+// }
 
-// UpdateUser creates a new user.
-func UpdateUser(user *User) (err error) {
-	if err = DB.Joins("Role").Save(user).Error; err != nil {
-		return err
-	}
+// // UpdateUser creates a new user.
+// func UpdateUser(user *User) (err error) {
+// 	if err = DB.Joins("Role").Save(user).Error; err != nil {
+// 		return err
+// 	}
 
-	return nil
-}
+// 	return nil
+// }
 
-// GetUser queries the database for all users.
-func GetUser(user *User, id string) (err error) {
-	if err = DB.Joins("Role").Where("users.id = ?", id).Find(user).Error; err != nil {
-		return err
-	}
+// // GetUser queries the database for all users.
+// func GetUser(user *User, id string) (err error) {
+// 	if err = DB.Joins("Role").Where("users.id = ?", id).Find(user).Error; err != nil {
+// 		return err
+// 	}
 
-	return nil
-}
+// 	return nil
+// }
 
-// DeleteUser queries the database for all users.
-func DeleteUser(user *User, id string) (err error) {
-	if err = DB.Delete(user, id).Error; err != nil {
-		return err
-	}
+// // DeleteUser queries the database for all users.
+// func DeleteUser(user *User, id string) (err error) {
+// 	if err = DB.Delete(user, id).Error; err != nil {
+// 		return err
+// 	}
 
-	return nil
-}
+// 	return nil
+// }
 
-// get user by params
-func GetUserByParams(params map[string]interface{}, user *User) (err error) {
-	if err = DB.Where(params).Find(user).Error; err != nil {
-		return err
-	}
+// // get user by params
+// func GetUserByParams(params map[string]interface{}, user *User) (err error) {
+// 	if err = DB.Where(params).Find(user).Error; err != nil {
+// 		return err
+// 	}
 
-	return nil
-}
+// 	return nil
+// }
